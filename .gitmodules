@@ -1,6 +1,21 @@
-[submodule "vendor/symfony/src/Symfony/ClassLoader"]
-	path = vendor/symfony/src/Symfony/ClassLoader
-	url = https://github.com/symfony/ClassLoader.git
-[submodule "vendor/symfony/src/Symfony/EventDispatcher"]
-	path = vendor/symfony/src/Symfony/EventDispatcher
+[submodule "vendor/symfony/src/Symfony/Component/ClassLoader"]
+	path = vendor/symfony/src/Symfony/Component/ClassLoader
 	url = https://github.com/symfony/EventDispatcher.git
+[submodule "vendor/symfony/src/Symfony/Component/EventDispatcher"]
+	path = vendor/symfony/src/Symfony/Component/EventDispatcher
+	url = https://github.com/symfony/EventDispatcher.git
+[submodule "vendor/pimple"]
+	path = vendor/pimple
+	url = https://github.com/fabpot/Pimple.git
+[submodule "vendor/symfony/src/Symfony/Component/HttpFoundation"]
+	path = vendor/symfony/src/Symfony/Component/HttpFoundation
+	url = https://github.com/symfony/HttpFoundation.git
+[submodule "vendor/symfony/src/Symfony/Component/Yaml"]
+	path = vendor/symfony/src/Symfony/Component/Yaml
+	url = https://github.com/symfony/Yaml.git
+[submodule "vendor/monolog"]
+	path = vendor/monolog
+	url = https://github.com/Seldaek/monolog.git
+[submodule "vendor/symfony/src/Symfony/Component/Process"]
+	path = vendor/symfony/src/Symfony/Component/Process
+	url = https://github.com/symfony/Process.git

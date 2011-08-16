@@ -1,0 +1,13 @@
+config:
+  listen: 192.168.1.5
+  port: 8081
+  basedir: /var/www/pkb/web
+
+#System config
+
+  timeout: 3600
+
+services:
+  response_providers:
+    file: \Postman\Response\FileResponseProvider
+    404:  \Postman\Response\Error404ResponseProvider
