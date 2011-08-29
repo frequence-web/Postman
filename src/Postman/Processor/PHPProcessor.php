@@ -16,7 +16,6 @@ class PHPProcessor extends ContainerAware implements ProcessorInterface
 
   public function prepare(Request $request)
   {
-    $request->server->set('DOCUMENT_ROOT', $this->get('config.basedir'));
   }
 
   public function process(Request $request, Response $response, $content)
