@@ -22,7 +22,7 @@ class PHPProcessor extends ContainerAware implements ProcessorInterface
   {
     $this->prepare($request);
 
-    $process = new PhpProcess($content, $this->get('config.basedir'), $request->server->all());
+    $process = new PhpProcess($content, $this->getParameter('basedir'), $request->server->all());
 
     $content = '';
     $process->run(function($type, $stdout) use ($response, &$content) {
