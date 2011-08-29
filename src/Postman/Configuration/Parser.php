@@ -33,11 +33,11 @@ class Parser extends ContainerAware
      * @param string $baseKey
      * @return void
      */
-    private function parseConfig(array $config, $baseKey = 'config.')
+    private function parseConfig(array $config, $baseKey = '')
     {
         foreach ($config as $key => $value) {
             if (is_scalar($value)) {
-                $this->container[$baseKey.$key] = $value;
+                $this->container->setParameter($baseKey.$key, $value);
             }
             elseif (is_array($value)) {
                 $this->parseConfig($value, $baseKey.$key.'.');

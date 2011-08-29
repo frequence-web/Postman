@@ -21,10 +21,10 @@ class RequestHandler extends ContainerAware implements RequestHandlerInterface
         $requestHeaders[] = $line;
     }
 
-    $request = Request::createFromHttp($requestHeaders, $this->get('config.port'));
+    $request = Request::createFromHttp($requestHeaders, $this->getParameter('port'));
     $request->server->set('REMOTE_HOST', stream_socket_get_name($event->getConnection(), true));
     $request->server->set('REMOTE_ADDR', gethostbyname(stream_socket_get_name($event->getConnection(), true)));
-    $request->server->set('DOCUMENT_ROOT', $this->get('config.basedir'));
+    $request->server->set('DOCUMENT_ROOT', $this->getParameter('basedir'));
 
     $this->get('logger')->debug('Sending get_response event');
     $getResponseEvent = new GetResponseEvent($request);

@@ -20,7 +20,7 @@ class FileResponseProvider extends ContainerAware implements ResponseProviderInt
     $parametersPos = strpos($request->getRequestUri(), '?');
     $filename = false === $parametersPos ? $request->getRequestUri() : substr($request->getRequestUri(), '0', $parametersPos);
 
-    if (is_file($filename = ($this->get('config.basedir').$filename))) {
+    if (is_file($filename = ($this->getParameter('basedir').$filename))) {
       $this->get('logger')->info('File found. URI: '.$request->getRequestUri());
 
       $response = new Response(file_get_contents($filename));

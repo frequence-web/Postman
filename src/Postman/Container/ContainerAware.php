@@ -7,38 +7,48 @@
 
 namespace Postman\Container;
 
+use \Postman\Container\Container;
+
 abstract class ContainerAware
 {
-  /**
-   * @var \Pimple
-   */
-  protected $container;
+    /**
+    * @var Container
+    */
+    protected $container;
 
-  public function __construct(\Pimple $container)
-  {
-    $this->container = $container;
-  }
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
-  public function get($key)
-  {
-    return $this->container[$key];
-  }
+    public function get($key)
+    {
+        return $this->container[$key];
+    }
 
-  /**
-   * @param \Pimple $container
-   */
-  public function setContainer($container)
-  {
-    $this->container = $container;
-  }
+    public function getParameter($key, $default = null)
+    {
+        return $this->container->getParameter($key, $default);
+    }
 
-  /**
-   * @return \Pimple
-   */
-  public function getContainer()
-  {
-    return $this->container;
-  }
+    public function hasParameter($key)
+    {
+        return $this->container->hasParameter($key);
+    }
 
+    /**
+    * @param Container $container
+    */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+    }
 
+    /**
+    * @return Container
+    */
+    public function getContainer()
+    {
+        return $this->container;
+    }
 }

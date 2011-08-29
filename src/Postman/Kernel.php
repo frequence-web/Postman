@@ -38,17 +38,17 @@ abstract class Kernel extends ContainerAware
     {
         $this->stream = stream_socket_server(sprintf(
             'tcp://%s:%s',
-            $this->get('config.listen'),
-            $this->get('config.port')
+            $this->getParameter('listen', '127.0.0.1'),
+            $this->getParameter('port', 8080)
         ));
 
         $this->get('logger')->info(sprintf(
             'Started server. Listening on %s:%s',
-            $this->get('config.listen'),
-            $this->get('config.port')
+            $this->getParameter('listen', '127.0.0.1'),
+            $this->getParameter('port', 8080)
         ));
 
-        while ($con = stream_socket_accept($this->stream, $this->get('config.timeout'))) {
+        while ($con = stream_socket_accept($this->stream, $this->getParameter('timeout'))) {
             $this->get('logger')->info('Connection accepted');
             $this->get('event_dispatcher')->dispatch('postman.request', new RequestEvent($con));
             fclose($con);

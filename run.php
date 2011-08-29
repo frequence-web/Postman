@@ -3,7 +3,7 @@
 require_once __DIR__.'/config/autoload.php';
 
 // DIC
-$container = new Pimple;
+$container = new \Postman\Container\Container();
 
 // Set up event dispatcher
 $container['event_dispatcher'] = $container->share(function() {
