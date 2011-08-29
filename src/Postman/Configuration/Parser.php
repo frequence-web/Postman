@@ -43,7 +43,7 @@ class Parser extends ContainerAware
                 $this->parseConfig($value, $baseKey.$key.'.');
             }
             else {
-                throw new InvalidArgumentException('Unrecognized type');
+                throw new \InvalidArgumentException('Unrecognized type');
             }
         }
     }
