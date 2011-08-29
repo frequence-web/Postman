@@ -61,6 +61,9 @@ class Parser extends ContainerAware
                 case 'response_providers':
                     $this->parseResponseProviders($services);
                     break;
+                case 'processors':
+                    $this->parseProcessors($services);
+                    break;
                 default:
                     $this->container['event_dispatcher']->dispatch(
                         'postman.load_configuration.'.$type,
@@ -90,6 +93,31 @@ class Parser extends ContainerAware
             $this->container['event_dispatcher']->addListener(
                 'postman.get_response',
                 array($this->container['postman.response_provider.'.$key], 'handle')
+            );
+
+        }
+    }
+
+    /**
+     * Parse and set-up processors
+     *
+     * @param array $config
+     * @return void
+     */
+    private function parseProcessors(array $config)
+    {
+        $container = $this->container;
+        foreach ($config as $key => $processor) {
+
+            $this->container['postman.processor.'.$key] = $this->container->share(
+                function() use ($processor, $container) {
+                    return new $processor($container);
+                }
+            );
+
+            $this->container['event_dispatcher']->addListener(
+                'postman.call_processors',
+                array($this->container['postman.processor.'.$key], 'process')
             );
 
         }
