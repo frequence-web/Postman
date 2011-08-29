@@ -1,0 +1,13 @@
+config:
+  listen: 127.0.0.1
+  port: 8080
+  basedir: /var/www
+
+#System config
+
+  timeout: 3600
+
+services:
+  response_providers:
+    file: \Postman\Response\FileResponseProvider
+    404:  \Postman\Response\Error404ResponseProvider
