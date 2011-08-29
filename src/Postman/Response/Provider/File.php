@@ -1,12 +1,12 @@
 <?php
 
-namespace Postman\Response;
+namespace Postman\Response\Provider;
 
 use \Postman\Request\Event\GetResponseEvent;
 use \Postman\Container\ContainerAware;
 use \Symfony\Component\HttpFoundation\Response;
 
-class FileResponseProvider extends ContainerAware implements ResponseProviderInterface
+class File extends ContainerAware implements ProviderInterface
 {
   protected static $mimeTypes = array(
     'css' => 'text/css'
@@ -26,7 +26,7 @@ class FileResponseProvider extends ContainerAware implements ResponseProviderInt
       $response = new Response(file_get_contents($filename));
 
       $response->headers->set('content-type', $this->guessFileType($filename));
-      
+
       $event->setResponse($response);
 
       $this->get('logger')->info('Delivering '.$this->guessFileType($filename).' file.');

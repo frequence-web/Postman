@@ -9,5 +9,5 @@ config:
 
 services:
   response_providers:
-    file: \Postman\Response\FileResponseProvider
-    404:  \Postman\Response\Error404ResponseProvider
+    file: \Postman\Response\Provider\File
+    404:  \Postman\Response\Provider\Error404

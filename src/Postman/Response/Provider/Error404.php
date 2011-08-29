@@ -1,11 +1,11 @@
 <?php
 
-namespace Postman\Response;
+namespace Postman\Response\Provider;
 
 use \Postman\Request\Event\GetResponseEvent;
 use \Postman\Container\ContainerAware;
 
-class Error404ResponseProvider extends ContainerAware implements ResponseProviderInterface
+class Error404 extends ContainerAware implements ProviderInterface
 {
   public function handle(GetResponseEvent $event)
   {
