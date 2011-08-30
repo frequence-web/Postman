@@ -81,7 +81,7 @@ abstract class Kernel extends ContainerAware
         // Add to container
         $container = $this->container;
         $container['postman.request_handler'] = $container->share(function() use ($container) {
-            return new \Postman\Request\RequestHandler($container);
+            return new \Postman\Request\Handler\Handler($container);
         });
 
         // And connect event

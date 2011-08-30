@@ -1,10 +1,10 @@
 <?php
 
-namespace Postman\Request;
+namespace Postman\Request\Handler;
 
 use \Postman\Request\Event\RequestEvent;
 
-interface RequestHandlerInterface
+interface HandlerInterface
 {
   public function handle(RequestEvent $event);
 }

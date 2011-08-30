@@ -5,14 +5,15 @@
  * @author Yohan Giarelli <yohan@giarelli.org>
  */
 
-namespace Postman\Request;
+namespace Postman\Request\Handler;
 
 use \Symfony\Component\HttpFoundation\Response;
 use \Postman\Request\Event\RequestEvent;
 use \Postman\Container\ContainerAware;
 use \Postman\Request\Event\GetResponseEvent;
+use \Postman\Request\Request;
 
-class RequestHandler extends ContainerAware implements RequestHandlerInterface
+class Handler extends ContainerAware implements HandlerInterface
 {
     public function handle(RequestEvent $event)
     {
