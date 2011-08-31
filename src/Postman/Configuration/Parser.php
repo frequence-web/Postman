@@ -23,6 +23,19 @@ class Parser extends ContainerAware
     {
         $this->parseConfig($config['config']);
         $this->parseServices($config['services']);
+
+        foreach ($config as $type => $subConfig) {
+            switch ($type) {
+                case 'config':
+                case 'services':
+                    break;
+                default:
+                    $this->container['event_dispatcher']->dispatch(
+                        'postman.load_configuration.'.$type,
+                        new LoadConfigurationEvent($this->container, $subConfig)
+                    );
+            }
+        }
     }
 
     /**
@@ -64,9 +77,12 @@ class Parser extends ContainerAware
                 case 'processors':
                     $this->parseProcessors($services);
                     break;
+                case 'filters':
+                    $this->parseFilters($services);
+                    break;
                 default:
                     $this->container['event_dispatcher']->dispatch(
-                        'postman.load_configuration.'.$type,
+                        'postman.load_configuration.service.'.$type,
                         new LoadConfigurationEvent($this->container, $services)
                     );
             }
@@ -118,6 +134,31 @@ class Parser extends ContainerAware
             $this->container['event_dispatcher']->addListener(
                 'postman.call_processors',
                 array($this->container['postman.processor.'.$key], 'process')
+            );
+
+        }
+    }
+
+    /**
+     * Parse and set-up request filters
+     *
+     * @param array $config
+     * @return void
+     */
+    private function parseFilters(array $config)
+    {
+        $container = $this->container;
+        foreach ($config as $key => $filter) {
+
+            $this->container['postman.filter.'.$key] = $this->container->share(
+                function() use ($filter, $container) {
+                    return new $filter($container);
+                }
+            );
+
+            $this->container['event_dispatcher']->addListener(
+                'postman.filter_request',
+                array($this->container['postman.filter.'.$key], 'listenFilterEvent')
             );
 
         }

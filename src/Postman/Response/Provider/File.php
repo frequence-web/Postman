@@ -17,10 +17,19 @@ class File extends Provider implements ProviderInterface
         /** @var $request \Symfony\Component\HttpFoundation\Request */
         $request = $event->getRequest();
 
-        $parametersPos = strpos($request->getRequestUri(), '?');
-        $filename = false === $parametersPos ? $request->getRequestUri() : substr($request->getRequestUri(), '0', $parametersPos);
+        $filename = null;
+        if ($request->server->has('SCRIPT_FILENAME')) {
+            $filename = $request->server->get('SCRIPT_FILENAME');
+            $this->get('logger')->info('Using script filename path : '.$filename);
+        } elseif ($request->server->has('PATH_TRANSLATED')) {
+            $filename = $this->getParameter('basedir').substr($request->server->get('PATH_TRANSLATED'), 9);
+            $this->get('logger')->info('Using translated path : '.$filename);
+        } else {
+            $urlParts = parse_url($request->getRequestUri());
+            $filename = $this->getParameter('basedir').$urlParts['path'];
+        }
 
-        if (is_file($filename = ($this->getParameter('basedir').$filename))) {
+        if (is_file($filename)) {
             $this->get('logger')->info('File found. URI: '.$request->getRequestUri());
 
             $response = new Response(file_get_contents($filename));
