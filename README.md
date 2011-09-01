@@ -23,6 +23,5 @@ Run the server :
 TODO
 ----
 
- * Implements Processors (PHP) -- Work in progress
- * Implements URL resolvers (URL rewriting)
+ * Encapsulate and refactor socket management (and make it mockable)
  * Refactor a lot of things

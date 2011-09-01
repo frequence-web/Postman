@@ -85,6 +85,9 @@ class ParserTest extends \TestCase
     {
         $this->assertEquals($this->container->getParameter('listen'), '192.168.1.5');
         $this->assertTrue($this->eventFired);
+        $this->assertInstanceOf('\\Postman\\Response\\Provider\\File', $this->container['postman.response_provider.file']);
+        $this->assertInstanceOf('\\Postman\\Processor\\PHP', $this->container['postman.processor.PHP']);
+        $this->assertInstanceOf('\\Postman\\Request\\Filter\\UriFilter', $this->container['postman.filter.URI']);
     }
 }
 
