@@ -1,13 +1,33 @@
+# Postman server configuration
+
+# Basic configuration
 config:
-  listen: 127.0.0.1
-  port: 8080
-  basedir: /var/www
+    listen: 127.0.0.1
+    port: 8080
+    basedir: /var/www/
+    timeout: 72000
 
-#System config
+# URL Rewriting
+uri_filter:
+    skip_real_files: true
+    directory_index: index.php
+#    rules:
+#        -
+#            pattern: '^(.*)$'
+#            destination: '/index.php'
 
-  timeout: 3600
+# System config
 
 services:
-  response_providers:
-    file: \Postman\Response\FileResponseProvider
-    404:  \Postman\Response\Error404ResponseProvider
+    response_providers:
+        # Add your response providers here
+        file: \Postman\Response\Provider\File
+        404:  \Postman\Response\Provider\Error404
+
+    processors:
+        PHP: \Postman\Processor\PHP
+        # Add your processors here
+
+    filters:
+        URI: \Postman\Request\Filter\UriFilter
+        # Add your filters here
