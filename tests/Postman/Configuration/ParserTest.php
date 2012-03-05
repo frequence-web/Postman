@@ -1,8 +1,6 @@
 <?php
+
 namespace Postman\Configuration;
-
-
-require_once '/var/www/Postman/src/Postman/Configuration/Parser.php';
 
 /**
  * Test class for Parser.
